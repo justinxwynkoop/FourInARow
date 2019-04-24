@@ -4,8 +4,9 @@ class Player {
     this.id = id;
     this.color = color;
     this.active = active;
-    this.token = this.createTokens(21);
+    this.tokens = this.createTokens(21);
   }
+
 
   /**
    * Creates token objects for player
@@ -24,6 +25,13 @@ class Player {
   }
 
 
+  /**
+   * Gets all tokens that haven't been dropped.
+   * @return {array}  Array of unused tokens.
+   */
+  get unusedTokens() {
+    return this.tokens.filter(token => !token.dropped);
+  }
 
 
   /**
@@ -36,10 +44,10 @@ class Player {
 
 
   /**
-   * Gets the active token by returning the first token in the array of unused tokens
-   * @return {Object} First token object in the array of unused tokens
+   * Check if a player has any undropped tokens left
+   * @return {Boolean} 
    */
-  get activeToken() {
-    return this.unusedTokens[0];
+  checkTokens() {
+    return this.unusedTokens.length == 0 ? false : true;
   }
 }
